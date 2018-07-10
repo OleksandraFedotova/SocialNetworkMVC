@@ -1,0 +1,50 @@
+﻿@model List<DataStructuresAndLINQ.Todo>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>Todo</h4>
+    <hr />
+    @foreach(var todo in Model){
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => todo.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => todo.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => todo.CreatedAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => todo.CreatedAt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => todo.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => todo.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => todo.IsComlete)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => todo.IsComlete)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => todo.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => todo.UserId)
+        </dd>
+    </dl>
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
