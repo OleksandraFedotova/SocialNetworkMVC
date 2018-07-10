@@ -24,6 +24,7 @@
         background-color: #8bf5f8;
         float: right;
         cursor: pointer;
+        width:100%;
     }
 
     .todo {
@@ -82,7 +83,7 @@
                 </div>
             </div>
             <div>
-                <div id="collapse-@user.Id" class="collapse col-md-10" aria-expanded="false">
+                <div id="collapse-@user.Id" class="collapse col-md-10 float-right" aria-expanded="false">
                     @if (user.Posts.Count() > 0)
                     {
                         <div >
