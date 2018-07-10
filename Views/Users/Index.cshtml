@@ -1,0 +1,187 @@
+﻿@model List<DataStructuresAndLINQ.DataStructures.User>
+
+@{
+    ViewData["Title"] = "View";
+}
+<style>
+
+    .avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .comments {
+        background-color: #f5f274;
+        border: dashed #061d8b;
+    }
+
+    .float-right {
+        float: right;
+    }
+
+    .posts {
+        border: dotted #061d8b;
+        background-color: #8bf5f8;
+        float: right;
+        cursor: pointer;
+    }
+
+    .todo {
+        border: dotted #a069e6;
+        background-color: #7cf5c0;
+        cursor: pointer;
+    }
+
+    .user {
+        border: solid 2px #000000;
+        background-color: #e1f6f0;
+        margin-bottom: 15px;
+        overflow: hidden;
+        padding: 10px;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+</style>
+
+<h2>View</h2>
+
+<div>
+    <h4>Users</h4>
+    <hr />
+    <div class="dl-horizontal user">
+        <div class="col-md-3">
+            Photo
+        </div>
+        <div class="col-md-3">
+            Name
+        </div>
+        <div class="col-md-3">
+            Posts
+        </div>
+        <div class="col-md-3">
+            Todos
+        </div>
+
+    </div>
+    @foreach (var user in Model)
+
+    {
+        <div class="dl-horizontal user" id="user-@user.Id">
+            <div style="cursor:pointer">
+                <div class="col-md-3">
+                    <img onclick="location.href='@Url.Action("UserById", "Users", new { id=user.Id})'" class="avatar" src="@Html.DisplayFor(model => user.Avatar)" />
+                </div>
+                <div class="col-md-3" style="height:100px;">
+                    @user.Name
+                </div>
+                <div class="col-md-3" style="height:100px;">
+                    <a data-toggle="collapse" href="#collapse-@user.Id">@user.Posts.Count()</a>
+                </div>
+                <div class="col-md-3" style="height:100px;">
+                    <a data-toggle="collapse" href="#collapse-todo-@user.Id">@user.Todos.Count()</a>
+                </div>
+            </div>
+            <div>
+                <div id="collapse-@user.Id" class="collapse col-md-10" aria-expanded="false">
+                    @if (user.Posts.Count() > 0)
+                    {
+                        <div >
+                            Posts:   @user.Posts.Count();
+                        </div>
+                        @foreach (var post in user.Posts)
+                        {
+                            <div onclick="location.href='@Url.Action("PostById", "Posts", new { id=post.Id})'" class="posts">
+                                <div>
+                                    @Html.DisplayNameFor(model => post.createdAt)
+                                    @Html.DisplayFor(model => post.createdAt)
+                                </div>
+                                <dt>
+                                    @Html.DisplayNameFor(model => post.Title)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => post.Title)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => post.Body)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => post.Body)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => post.Likes)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => post.Likes)
+                                </dd>
+                                <div class="col-md-12 float-right">
+                                    <a data-toggle="collapse" href="#collapse-comments-@post.Id">Comments:   @post.Comments.Count()</a>
+                                </div>
+                                <div id="collapse-comments-@post.Id" class="collapse float-right col-md-12">
+                                    @if (post.Comments.Count() > 0)
+                                    {
+                                        @foreach (var comment in post.Comments)
+                                        {
+                                            <div class="comments">
+                                                <dt>
+                                                    @Html.DisplayNameFor(model => comment.Body)
+                                                </dt>
+                                                <dd>
+                                                    @Html.DisplayFor(model => comment.Body)
+                                                </dd>
+                                                <dt>
+                                                    @Html.DisplayNameFor(model => comment.Likes)
+                                                </dt>
+                                                <dd>
+                                                    @Html.DisplayFor(model => comment.Likes)
+                                                </dd>
+                                            </div>
+
+                                        }
+                                    }
+                                </div>
+
+                            </div>
+                        }
+
+                    }
+                </div>
+                <div id="collapse-todo-@user.Id" class="collapse  float-right col-md-10" aria-expanded="false">
+                    @if (user.Todos.Count() > 0)
+                    {
+                        <div class="col-md-10 float-right">
+                            Todos:   @user.Todos.Count();
+                        </div>
+                        @foreach (var todo in user.Todos)
+                        {
+                            <div onclick="location.href='@Url.Action("TodoById", "Todos", new { id=todo.Id})'" class="todo">
+                                <dt>
+                                    @Html.DisplayNameFor(model => todo.CreatedAt)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => todo.CreatedAt)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => todo.Name)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => todo.Name)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => todo.IsComlete)
+                                </dt>
+                                <dd>
+                                    @Html.CheckBoxFor(model => todo.IsComlete)
+                                </dd>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+

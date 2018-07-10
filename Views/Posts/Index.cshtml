@@ -1,0 +1,57 @@
+﻿@model List<DataStructuresAndLINQ.Post>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    @foreach (var post in Model)
+    {
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => post.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => post.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => post.createdAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => post.createdAt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => post.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => post.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => post.Body)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => post.Body)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => post.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => post.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => post.Likes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => post.Likes)
+        </dd>
+    </dl>
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
