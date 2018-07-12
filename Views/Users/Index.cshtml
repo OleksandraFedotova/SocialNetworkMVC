@@ -134,7 +134,7 @@
                                 <tr>
                                     <td> @Html.DisplayNameFor(model => todo.IsComlete)</td>
                                     <td>
-                                        @Html.CheckBoxFor(model => todo.IsComlete, new { @readonly = "readonly" })
+                                        @Html.DisplayFor(model => todo.IsComlete, new { @readonly = "readonly" })
                                     </td>
                                 </tr>
                             </table>

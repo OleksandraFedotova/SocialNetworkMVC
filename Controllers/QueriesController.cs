@@ -71,6 +71,10 @@ namespace SocialNetworkMVC.Controllers
         public ActionResult Query3(int userId)
         {
             var doneTodos = _dataService.GetDoneTodos(userId);
+            if (doneTodos.Count==0)
+            {
+                ViewBag.Message = "There is no done todos for user";
+            }
             return View(doneTodos);
 
         }
