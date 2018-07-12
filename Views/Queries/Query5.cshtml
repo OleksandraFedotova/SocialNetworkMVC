@@ -1,0 +1,56 @@
+﻿@model PostResponse
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>
+    5. Obtain the following structure (pass Post Id to parameters)
+</h2>
+<h5>
+    Post
+    <br />
+    The longest comment of the post
+    <br />
+    The most liked comment on the post
+    <br />
+    Number of comments under the post where or 0 likes or text length < 80
+</h5>
+<form class="form" id="searchForm" action="@Url.Action("Query5", "Queries")" method="post">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-md-10">
+                <label for="address" class="sr-only">Get Post Count</label>
+                <input type="text" class="form-control" id="address" placeholder="Post Id" name="postId">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-2">
+                <input type="submit" class="btn btn-block btn-success" value="Search" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model != null)
+{
+    <table>
+        <tr>
+            <td>The longest comment of the post </td>
+        </tr>
+        <tr>
+            <td>@Model.TheBiggestComment.CreatedAt</td>
+            <td>@Model.TheBiggestComment.Body</td>
+            <td>Likes = @Model.TheBiggestComment.Likes</td>
+        </tr>
+        <tr>
+            <td>The most liked comment on the post </td>
+        </tr>
+        <tr>
+            <td>@Model.TheMostLikedComment.CreatedAt</td>
+            <td>@Model.TheMostLikedComment.Body</td>
+            <td>Likes = @Model.TheMostLikedComment.Likes</td>
+        </tr>
+        <tr><td>Number of comments under the post where or 0 likes or text length < 80</td></tr>
+        <tr><td>@Model.QuantityOfNeededComment</td></tr>
+    </table>
+
+}
+

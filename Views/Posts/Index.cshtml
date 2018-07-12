@@ -1,4 +1,4 @@
-﻿@model List<DataStructuresAndLINQ.Post>
+﻿@model List<SocialNetworkMVC.Models.Post>
 
 @{
     ViewData["Title"] = "View";
@@ -9,46 +9,24 @@
 <div>
     <h4>Post</h4>
     <hr />
+    <tr>
+        <th>@Html.DisplayNameFor(model => Model.FirstOrDefault().Id)</th>
+        <th>@Html.DisplayNameFor(model => Model.FirstOrDefault().createdAt)</th>
+        <th>@Html.DisplayNameFor(model => Model.FirstOrDefault().Title)</th>
+        <th>@Html.DisplayNameFor(model => Model.FirstOrDefault().Body)</th>
+        <th>@Html.DisplayNameFor(model => Model.FirstOrDefault().Likes)</th>
+        <th>@Html.DisplayNameFor(model => Model.FirstOrDefault().Comments.Count())</th>
+    </tr>
     @foreach (var post in Model)
     {
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => post.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => post.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => post.createdAt)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => post.createdAt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => post.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => post.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => post.Body)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => post.Body)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => post.UserId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => post.UserId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => post.Likes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => post.Likes)
-        </dd>
-    </dl>
+    <tr>
+        <td>@Html.DisplayFor(model => post.Id)</td>
+        <td>@Html.DisplayFor(model => post.createdAt)</td>
+        <td>@Html.DisplayFor(model => post.Title)</td>
+        <td>@Html.DisplayFor(model => post.Body)</td>
+        <td>@Html.DisplayFor(model => post.Likes)</td>
+        <td>@Html.DisplayFor(model => post.Comments.Count())</td>
+    </tr>
     }
 </div>
 <div>

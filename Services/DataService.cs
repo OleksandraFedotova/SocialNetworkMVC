@@ -1,23 +1,177 @@
-﻿using DataStructuresAndLINQ;
-using DataStructuresAndLINQ.DataStructures;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using SocialNetworkMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace SocialNetworkMVC.Services
 {
-    public class DataService
+    public class DataService : IDataService
     {
         private static List<User> users;
-        private static List<Post> posts;
+        /*= new List<User>
+        {
+            new User
+            {
+                Id=1,
+                Avatar="https://www.w3schools.com/w3images/avatar2.png",
+                CreatedAt=DateTime.Today,
+                Name="fdnjknvlkfdv",
+                Email="fkkfj@jdfjf",
+                Posts=new List<Post>
+                {
+                    new Post
+                    {
+                        Id=2,
+                        Body="11111111111234567",
+                        Likes=7,
+                        Title="ertyuiop[",
+                        createdAt=DateTime.Today,
+                        UserId=1,
+                        Comments=new List<Comment>
+                        {
+                            new Comment
+                            {
+                                Id=1,
+                                Body="3333333333333399999",
+                                CreatedAt=DateTime.Today,
+                                Likes=8,
+                                PostId=2,
+                                UserId=1
+                            }
+                        }
+                    }
+                },
+                Todos=new List<Todo>
+                {
+                    new Todo
+                    {
+                        Id=1,
+                        CreatedAt=DateTime.Today,
+                        IsComlete=true,
+                        Name="jjshdcl",
+                        UserId=1
+                    },
+                     new Todo
+                    {
+                        Id=2,
+                        CreatedAt=DateTime.Today,
+                        IsComlete=false,
+                        Name="jjshdcl",
+                        UserId=1
+                    },
+                     new Todo
+                    {
+                        Id=3,
+                        CreatedAt=DateTime.Today,
+                        IsComlete=true,
+                        Name="jjshdcl",
+                        UserId=1
+                    }
+                }
+            },
+              new User
+            {
+                Id=2,
+                Avatar="https://www.w3schools.com/w3images/avatar2.png",
+                CreatedAt=DateTime.Today,
+                Email="fkkfj@jdfjf",
+                Name="fdnjknvlkfdv",
+                Posts=new List<Post>
+                {
+                    new Post
+                    {
+                        Id=1,
+                        Body="11111111111234567",
+                        Likes=7,
+                        Title="ertyuiop[",
+                        createdAt=DateTime.Today,
+                        UserId=2,
+                        Comments=new List<Comment>
+                        {
+                            new Comment
+                            {
+                                Id=1,
+                                Body="999999999999",
+                                CreatedAt=DateTime.Today,
+                                Likes=8,
+                                PostId=1,
+                                UserId=2
+                            }
+                        }
+
+                    }
+                },
+                Todos=new List<Todo>
+                {
+                    new Todo
+                    {
+                        Id=3,
+                        CreatedAt=DateTime.Today,
+                        IsComlete=false,
+                        Name="jjshdcl",
+                        UserId=2
+                    }
+                }
+            },
+        }
+            
+            ;
+        private static List<Post> posts= new List<Post>
+        {
+             new Post
+                    {
+                        Id=2,
+                        Body="11111111111234567",
+                        Likes=7,
+                        Title="ertyuiop[",
+                        createdAt=DateTime.Today,
+                        UserId=1,
+                        Comments=new List<Comment>
+                        {
+                            new Comment
+                            {
+                                Id=1,
+                                Body="3333333333333399999",
+                                CreatedAt=DateTime.Today,
+                                Likes=8,
+                                PostId=2,
+                                UserId=1
+                            }
+                        }
+                    },
+              new Post
+                    {
+                        Id=1,
+                        Body="11111111111234567",
+                        Likes=7,
+                        Title="ertyuiop[",
+                        createdAt=DateTime.Today,
+                        UserId=2,
+                        Comments=new List<Comment>
+                        {
+                            new Comment
+                            {
+                                Id=1,
+                                Body="999999999999",
+                                CreatedAt=DateTime.Today,
+                                Likes=8,
+                                PostId=1,
+                                UserId=2
+                            }
+                        }
+
+                    }
+
+        };*/
+
+       private static List<Post> posts;
         private static List<Todo> todos;
         private static List<Comment> comments;
         private static List<Address> addresses;
 
-        public DataService()
+       public DataService()
         {
             HttpClient client = new HttpClient();
 
@@ -82,7 +236,7 @@ namespace SocialNetworkMVC.Services
                 });
             addressesResponse.Wait();
             #endregion
-           
+
             var MyStructure = users.Select(user => new User
             {
                 Avatar = user.Avatar,
@@ -92,7 +246,7 @@ namespace SocialNetworkMVC.Services
                 CreatedAt = user.CreatedAt,
             }).ToList();
 
-            foreach(User u in users)
+            foreach (User u in users)
             {
                 u.Address = addresses.Where(addr => addr.UserId == u.Id)
                                   .Select(address => new Address
@@ -166,5 +320,82 @@ namespace SocialNetworkMVC.Services
         {
             return posts.Where(p => p.Id == id).FirstOrDefault();
         }
+
+        public int GetPostsCount(int id)
+        {
+            return posts.Where(p => p.UserId == id).Count();
+        }
+
+        public IEnumerable<Comment> GetPostComentsLessThenFiFtyLength(int userId)
+        {
+                return users.Where(u => u.Id == userId).SelectMany(u => u.Posts
+                    .SelectMany(p => p.Comments).Where(c => c.Body.Length < 50)).ToList();
+        }
+
+
+        public IDictionary<int, string> GetDoneTodos(int userId)
+        {
+            var user = users.Where(u => u.Id == userId).FirstOrDefault();
+            var doneTodos = user.Todos
+                    .Where(td => td.IsComlete == true)
+                    .Select(res => new { res.Id, res.Name })
+                    .ToDictionary(t => t.Id, t => t.Name);
+
+            return doneTodos;
+        }
+
+        public IEnumerable<User> GetSortedUserAndToDos()
+        {
+            var res = users
+            .OrderBy(user => user.Name)
+            .Select(user => new User
+            {
+                Id = user.Id,
+                Todos = user.Todos.Select(x => x).OrderByDescending(todo => todo.Name).ToList(),
+                Name = user.Name,
+                Avatar = user.Avatar,
+                CreatedAt = user.CreatedAt,
+                Email = user.Email
+            }).ToList();
+            return res;
+        }
+
+        public PostResponse GetPostResponse(int postId)
+        {
+            var post = users.SelectMany(u => u.Posts)
+                .Where(p => p.Id == postId).FirstOrDefault();
+
+            var resp = new PostResponse
+            {
+                TheBiggestComment = post.Comments.OrderByDescending(c => c.Body.Length)
+                   .Select(x => x).FirstOrDefault(),
+                TheMostLikedComment = post.Comments
+                   .OrderByDescending(c => c.Likes)
+                   .Select(x => x).FirstOrDefault(),
+                QuantityOfNeededComment = post.Comments.Count(c => c.Likes == 0 || c.Body.Length <= 80)
+
+            };
+            return resp;
+        }
+
+        public UserResponse GetUserResponse(int userId)
+        {
+            var user = users.Where(u => u.Id == userId).FirstOrDefault();
+
+            var resp = new UserResponse
+            {
+                QuantityOfNotDoneTodos = user.Todos.Where(todo => todo.IsComlete == false).Count(),
+                TheLatestPost = user.Posts.OrderByDescending(x => x.createdAt).FirstOrDefault(),
+                QuantityComentsAtLastPost = user.Posts.OrderByDescending(x => x.createdAt)
+                    .FirstOrDefault()?.Comments?.Count() ?? 0,
+                MostPopularPostWithComments = user.Posts
+                    .OrderByDescending(x => x.Comments).FirstOrDefault(x => x.Body.Length > 80),
+                MostPopularPostWithLikes = user.Posts
+                    .OrderByDescending(x => x.Likes).FirstOrDefault()
+            };
+
+            return resp;
+        }
+
     }
 }

@@ -1,0 +1,41 @@
+﻿@model Dictionary<int, string>
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>Here you can get user's done todos</h2>
+<form class="form" id="searchForm" action="@Url.Action("Query3", "Queries")" method="post">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-md-10">
+                <label for="address" class="sr-only">Get Post Count</label>
+                <input type="text" class="form-control" id="address" placeholder="Get user's posts count" name="userId">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-2">
+                <input type="submit" class="btn btn-block btn-success" value="Search" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    @if (Model != null)
+    {
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+
+        @foreach (var elem in Model)
+        {
+            <tr>
+            <td>@elem.Key</td>
+            <td>@elem.Value</td>
+            </tr>
+        }
+    </table>
+    }
+</div>
+
+

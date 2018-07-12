@@ -1,4 +1,4 @@
-﻿@model List<DataStructuresAndLINQ.DataStructures.User>
+﻿@model List<SocialNetworkMVC.Models.User>
 
 @{
     ViewData["Title"] = "View";
@@ -23,14 +23,12 @@
         border: dotted #061d8b;
         background-color: #8bf5f8;
         float: right;
-        cursor: pointer;
         width:100%;
     }
 
     .todo {
         border: dotted #a069e6;
         background-color: #7cf5c0;
-        cursor: pointer;
     }
 
     .user {
@@ -68,11 +66,11 @@
 
     {
         <div class="dl-horizontal user" id="user-@user.Id">
-            <div style="cursor:pointer">
+            <div>
                 <div class="col-md-3">
-                    <img onclick="location.href='@Url.Action("UserById", "Users", new { id=user.Id})'" class="avatar" src="@Html.DisplayFor(model => user.Avatar)" />
+                    <img onclick="location.href='@Url.Action("UserById", "Users", new { id=user.Id})'" style="cursor:pointer" class="avatar" src="@Html.DisplayFor(model => user.Avatar)" />
                 </div>
-                <div class="col-md-3" style="height:100px;">
+                <div onclick="location.href='@Url.Action("UserById", "Users", new { id=user.Id})'" class="col-md-3" style="cursor:pointer; height:100px;">
                     @user.Name
                 </div>
                 <div class="col-md-3" style="height:100px;">
@@ -91,7 +89,7 @@
                         </div>
                         @foreach (var post in user.Posts)
                         {
-                            <div onclick="location.href='@Url.Action("PostById", "Posts", new { id=post.Id})'" class="posts">
+                            <div  class="posts">
                                 <div>
                                     @Html.DisplayNameFor(model => post.createdAt)
                                     @Html.DisplayFor(model => post.createdAt)
@@ -99,7 +97,7 @@
                                 <dt>
                                     @Html.DisplayNameFor(model => post.Title)
                                 </dt>
-                                <dd>
+                                <dd onclick="location.href='@Url.Action("PostById", "Posts", new { id=post.Id})'" style="cursor:pointer">
                                     @Html.DisplayFor(model => post.Title)
                                 </dd>
                                 <dt>
@@ -154,7 +152,7 @@
                         </div>
                         @foreach (var todo in user.Todos)
                         {
-                            <div onclick="location.href='@Url.Action("TodoById", "Todos", new { id=todo.Id})'" class="todo">
+                            <div  class="todo">
                                 <dt>
                                     @Html.DisplayNameFor(model => todo.CreatedAt)
                                 </dt>
@@ -164,7 +162,7 @@
                                 <dt>
                                     @Html.DisplayNameFor(model => todo.Name)
                                 </dt>
-                                <dd>
+                                <dd onclick="location.href='@Url.Action("TodoById", "Todos", new { id=todo.Id})'" style="cursor:pointer">
                                     @Html.DisplayFor(model => todo.Name)
                                 </dd>
                                 <dt>

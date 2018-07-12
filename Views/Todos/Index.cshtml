@@ -1,4 +1,4 @@
-﻿@model List<DataStructuresAndLINQ.Todo>
+﻿@model List<SocialNetworkMVC.Models.Todo>
 
 @{
     ViewData["Title"] = "View";
@@ -9,40 +9,23 @@
 <div>
     <h4>Todo</h4>
     <hr />
-    @foreach(var todo in Model){
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => todo.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => todo.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => todo.CreatedAt)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => todo.CreatedAt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => todo.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => todo.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => todo.IsComlete)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => todo.IsComlete)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => todo.UserId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => todo.UserId)
-        </dd>
-    </dl>
-    }
+    <table>
+        <tr>
+            <th>@Html.DisplayNameFor(model => Model.FirstOrDefault().Id)</th>
+            <th>@Html.DisplayNameFor(model => Model.FirstOrDefault().CreatedAt)</th>
+            <th>@Html.DisplayNameFor(model => Model.FirstOrDefault().Name)</th>
+            <th>@Html.DisplayNameFor(model => Model.FirstOrDefault().IsComlete)</th>
+        </tr>
+        @foreach (var todo in Model)
+        {
+        <tr>
+            <td>@Html.DisplayFor(model => todo.Id)</td>
+            <td>@Html.DisplayFor(model => todo.CreatedAt)</td>
+            <td>@Html.DisplayFor(model => todo.Name)</td>
+            <td>@Html.DisplayFor(model => todo.IsComlete)</td>
+        </tr>
+        }
+    </table>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

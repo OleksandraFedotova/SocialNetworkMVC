@@ -1,0 +1,83 @@
+﻿@model List<SocialNetworkMVC.Models.User>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>Users</h4>
+    <hr />
+    <div class="dl-horizontal user">
+        <div class="col-md-3">
+            Photo
+        </div>
+        <div class="col-md-3">
+            Name
+        </div>
+        <div class="col-md-3">
+            Posts
+        </div>
+        <div class="col-md-3">
+            Todos
+        </div>
+
+    </div>
+    @foreach (var user in Model)
+
+    {
+        <div class="dl-horizontal user" id="user-@user.Id">
+            <div>
+                <div class="col-md-3">
+                    <img onclick="location.href='@Url.Action("UserById", "Users", new { id=user.Id})'" class="avatar" src="@Html.DisplayFor(model => user.Avatar)" />
+                </div>
+                <div onclick="location.href='@Url.Action("UserById", "Users", new { id=user.Id})'" style="cursor:pointer" class="col-md-6" style="height:100px;">
+                    @user.Name
+                </div>
+                <div class="col-md-3" style="height:100px;">
+                    <a data-toggle="collapse" href="#collapse-todo-@user.Id">@user.Todos.Count()</a>
+                </div>
+            </div>
+            <div>
+
+                <div id="collapse-todo-@user.Id" class="collapse  float-right col-md-10" aria-expanded="false">
+                    @if (user.Todos.Count() > 0)
+                    {
+                        <div class="col-md-10 float-right">
+                            Todos:   @user.Todos.Count();
+                        </div>
+                        @foreach (var todo in user.Todos)
+                        {
+                            <div onclick="location.href='@Url.Action("TodoById", "Todos", new { id=todo.Id})'" class="todo">
+                                <dt>
+                                    @Html.DisplayNameFor(model => todo.CreatedAt)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => todo.CreatedAt)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => todo.Name)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => todo.Name)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => todo.IsComlete)
+                                </dt>
+                                <dd>
+                                    @Html.CheckBoxFor(model => todo.IsComlete)
+                                </dd>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+
