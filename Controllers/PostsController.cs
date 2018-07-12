@@ -1,33 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DataStructuresAndLINQ;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SocialNetworkMVC.Models;
 using SocialNetworkMVC.Services;
+using System.Collections.Generic;
 
 namespace SocialNetworkMVC.Controllers
 {
     public class PostsController : Controller
     {
-        private DataService dataService;
+        private IDataService _dataService;
         private List<Post> posts;
 
-        public PostsController()
+        public PostsController(IDataService dataService)
         {
-            dataService = new DataService();
+            _dataService = dataService;
         }
 
 
         public IActionResult Index()
         {
-            posts = dataService.GetPosts();
+            posts = _dataService.GetPosts();
             return View(posts);
         }
 
         public IActionResult PostById(int id)
         {
-           Post post = dataService.GetPostById(id);
+           Post post = _dataService.GetPostById(id);
             return View(post);
         }
     }

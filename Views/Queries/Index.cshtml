@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+}
+
+<div class="col-md-12">
+    <h2>Список запросов на странице запросы</h2>
+    <ul>
+        <li><a style="cursor:pointer" onclick="location.href='@Url.Action("Query1", "Queries")'">1.Get the number of comments under the posts of a particular user (on id) (list of post-number)</a></li>
+        <li><a style="cursor:pointer" onclick="location.href='@Url.Action("Query2", "Queries")'">2.Get a list of comments under the posts of a particular user (on id), where body comment < 50 characters (list of comments)</a></li>
+        <li><a style="cursor:pointer" onclick="location.href='@Url.Action("Query3", "Queries")'">3.Get the list (id, name) from the list of todos that are executed for a specific user (by id)</a></li>
+        <li><a style="cursor:pointer" onclick="location.href='@Url.Action("Query4", "Queries")'">4.Get a list of users in alphabetical order (ascending) with sorted todo items by length name (descending)</a></li>
+        <li>
+            <a style="cursor:pointer" onclick="location.href='@Url.Action("Query5", "Queries")'">5. Obtain the following structure (pass Post Id to parameters)</a><br />
+            Post
+            <br />
+            The longest comment of the post
+            <br />
+            The most liked comment on the post
+            <br />
+            Number of comments under the post where or 0 likes or text length < 80
+        </li>
+        <li>
+            <a style="cursor:pointer" onclick="location.href='@Url.Action("Query6", "Queries")'">5. Obtain the following structure (pass User Id to parameters)</a><br />
+            User
+            <br />
+            Last post by user (by date)
+            <br />
+            Number of comments under the last post
+            <br />
+            Number of unfulfilled tasks for the user
+            <br />
+            The most popular user post (where most of the comments with a text length of more than 80 characters)
+            <br />
+            The most popular user post (where most of the likes)
+        </li>
+    </ul>
+</div>

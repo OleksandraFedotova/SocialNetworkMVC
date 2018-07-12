@@ -1,0 +1,53 @@
+﻿@model List<SocialNetworkMVC.Models.Comment>
+@{
+    ViewData["Title"] = "View";
+}
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<h2>2.Get a list of comments under the posts of a particular user (on id), where body comment < 50 characters (list of comments)</h2>
+<form class="form" id="searchForm" action="@Url.Action("Query2", "Queries")" method="post">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-md-10">
+                <label for="address" class="sr-only">Get Post Count</label>
+                <input type="text" class="form-control" id="address" placeholder="User Id" name="userId">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-2">
+                <input type="submit" class="btn btn-block btn-success" value="Search" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model != null)
+{
+    <div>
+        @foreach (var elem in Model)
+        {
+            <table>
+                <tr>
+                    <td class="col-md-3">@elem.CreatedAt</td>
+                    <td class="col-md-6">@elem.Body</td>
+                    <td class="col-md-3">Likes = @elem.Likes</td>
+                </tr>
+            </table>
+
+        }
+    </div>
+
+}

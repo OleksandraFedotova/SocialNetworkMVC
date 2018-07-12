@@ -1,0 +1,46 @@
+﻿@model int
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>Here you can get count of user's posts</h2>
+<form class="form" id="searchForm" action="@Url.Action("Query1", "Queries")" method="post">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-md-10">
+                <label for="address" class="sr-only">Get Post Count</label>
+                <input type="text" class="form-control" id="address" placeholder="Get user's posts count" name="userId">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-2">
+                <input type="submit" class="btn btn-block btn-success" value="Search" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <table>
+        <tr>
+            <td>User posts count = </td>
+            <td>@ViewBag.Count</td>
+        </tr>
+    </table>   
+</div>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>

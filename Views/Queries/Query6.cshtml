@@ -1,0 +1,90 @@
+﻿@model UserResponse
+@{
+    ViewData["Title"] = "View";
+}
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<h2>
+    5. Obtain the following structure (pass Post Id to parameters)
+</h2>
+<h5>
+    User
+    <br />
+    Last post by user (by date)
+    <br />
+    Number of comments under the last post
+    <br />
+    Number of unfulfilled tasks for the user
+    <br />
+    The most popular user post (where most of the comments with a text length of more than 80 characters)
+    <br />
+    The most popular user post (where most of the likes)
+</h5>
+<form class="form" id="searchForm" action="@Url.Action("Query5", "Queries")" method="post">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-md-10">
+                <label for="address" class="sr-only">Get Post Count</label>
+                <input type="text" class="form-control" id="address" placeholder="User Id" name="userId">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-2">
+                <input type="submit" class="btn btn-block btn-success" value="Search" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (Model != null)
+{
+<table>
+    <tr>
+        <td>Last post by user (by date) </td>
+    </tr>
+    <tr>
+        <td>@Model.TheLatestPost.createdAt</td>
+        <td>@Model.TheLatestPost.Title</td>
+        <td>@Model.TheLatestPost.Body</td>
+        <td>Likes = @Model.TheLatestPost.Likes</td>
+    </tr>
+    <tr><td> Number of comments under the last post</td></tr>
+    <tr><td>@Model.QuantityComentsAtLastPost</td></tr>
+    <tr><td> Number of unfulfilled tasks for the user</td></tr>
+    <tr><td>@Model.QuantityOfNotDoneTodos</td></tr>
+    <tr>
+        <td>The most popular user post (where most of the comments with a text length of more than 80 characters) </td>
+    </tr>
+    <tr>
+        <td>@Model.MostPopularPostWithComments.createdAt</td>
+        <td>@Model.MostPopularPostWithComments.Title</td>
+        <td>@Model.MostPopularPostWithComments.Body</td>
+        <td>Likes = @Model.MostPopularPostWithComments.Likes</td>
+    </tr>
+    <tr>
+        <td>The most popular user post (where most of the likes) </td>
+    </tr>
+    <tr>
+        <td>@Model.MostPopularPostWithLikes.createdAt</td>
+        <td>@Model.MostPopularPostWithLikes.Title</td>
+        <td>@Model.MostPopularPostWithLikes.Body</td>
+        <td>Likes = @Model.MostPopularPostWithLikes.Likes</td>
+    </tr>
+</table>
+
+}
+
