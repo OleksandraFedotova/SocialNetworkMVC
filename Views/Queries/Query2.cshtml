@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xs-9 col-sm-9 col-md-10">
                 <label for="address" class="sr-only">Get Post Count</label>
-                <input type="text" class="form-control" id="address" placeholder="User Id" name="userId">
+                <input type="number" class="form-control" id="address" placeholder="User Id" name="userId" required>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-2">
                 <input type="submit" class="btn btn-block btn-success" value="Search" />
@@ -20,18 +20,22 @@
 
 @if (Model != null)
 {
-    <div>
+<div>
+    <table>
+        <tr>
+            <th>Craeted At</th>
+            <th>Body</th>
+            <th>Likes</th>
+        </tr>
         @foreach (var elem in Model)
         {
-            <table>
-                <tr>
-                    <td class="col-md-3">@elem.CreatedAt</td>
-                    <td class="col-md-6">@elem.Body</td>
-                    <td class="col-md-3">Likes = @elem.Likes</td>
-                </tr>
-            </table>
+            <tr onclick="location.href='@Url.Action("TodoById", "Todos", new { id=elem.Id})'" style="cursor:pointer">
+                <td class="col-md-3">@elem.CreatedAt</td>
+                <td class="col-md-6">@elem.Body</td>
+                <td class="col-md-3">Likes = @elem.Likes</td>
+            </tr>
 
         }
+    </table>
     </div>
-
 }

@@ -18,11 +18,11 @@
         </tr>
         @foreach (var todo in Model)
         {
-        <tr>
+        <tr onclick="location.href='@Url.Action("TodoById", "Todos", new { id=todo.Id})'" style="cursor:pointer">
             <td>@Html.DisplayFor(model => todo.Id)</td>
             <td>@Html.DisplayFor(model => todo.CreatedAt)</td>
             <td>@Html.DisplayFor(model => todo.Name)</td>
-            <td>@Html.DisplayFor(model => todo.IsComlete)</td>
+            <td>@Html.DisplayFor(model => todo.IsComlete, new { @readonly = "readonly" })</td>
         </tr>
         }
     </table>

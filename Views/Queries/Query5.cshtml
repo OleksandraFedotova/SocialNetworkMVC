@@ -19,8 +19,8 @@
     <div class="form-group">
         <div class="row">
             <div class="col-xs-9 col-sm-9 col-md-10">
-                <label for="address" class="sr-only">Get Post Count</label>
-                <input type="text" class="form-control" id="address" placeholder="Post Id" name="postId">
+                <label for="postId" class="sr-only">Get Post Count</label>
+                <input type="number" class="form-control" id="postId" placeholder="Post Id" name="postId" required>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-2">
                 <input type="submit" class="btn btn-block btn-success" value="Search" />
@@ -35,22 +35,27 @@
         <tr>
             <td>The longest comment of the post </td>
         </tr>
+        @if (Model.TheBiggestComment != null)
+        {
         <tr>
             <td>@Model.TheBiggestComment.CreatedAt</td>
             <td>@Model.TheBiggestComment.Body</td>
-            <td>Likes = @Model.TheBiggestComment.Likes</td>
+            <td>@Model.TheBiggestComment.Likes likes</td>
         </tr>
+        }
+        @if (Model.TheMostLikedComment != null)
+        {
         <tr>
             <td>The most liked comment on the post </td>
         </tr>
         <tr>
             <td>@Model.TheMostLikedComment.CreatedAt</td>
             <td>@Model.TheMostLikedComment.Body</td>
-            <td>Likes = @Model.TheMostLikedComment.Likes</td>
+            <td>@Model.TheMostLikedComment.Likes likes</td>
         </tr>
+        }
         <tr><td>Number of comments under the post where or 0 likes or text length < 80</td></tr>
         <tr><td>@Model.QuantityOfNeededComment</td></tr>
     </table>
-
 }
 

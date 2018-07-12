@@ -7,27 +7,27 @@
 <h2>View</h2>
 
 <div>
-    <h4>Post</h4>
+    <h4>Posts</h4>
     <hr />
-    <tr>
-        <th>Id</th>
-        <th>Created At</th>
-        <th>Title</th>
-        <th>Body</th>
-        <th>Likes</th>
-        <th>Comments</th>
-    </tr>
-    @foreach (var post in Model)
-    {
-    <tr>
-        <td>@Html.DisplayFor(model => post.Id)</td>
-        <td>@Html.DisplayFor(model => post.createdAt)</td>
-        <td>@Html.DisplayFor(model => post.Title)</td>
-        <td>@Html.DisplayFor(model => post.Body)</td>
-        <td>@Html.DisplayFor(model => post.Likes)</td>
-        <td>@Html.DisplayFor(model => post.Comments.Count())</td>
-    </tr>
-    }
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Created At</th>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Likes</th>
+        </tr>
+        @foreach (var post in Model)
+        {
+            <tr onclick="location.href='@Url.Action("PostById", "Posts", new { id=post.Id})'" style="cursor:pointer">
+                <td>@Html.DisplayFor(model => post.Id)</td>
+                <td>@Html.DisplayFor(model => post.createdAt)</td>
+                <td >@Html.DisplayFor(model => post.Title)</td>
+                <td>@Html.DisplayFor(model => post.Body)</td>
+                <td>@Html.DisplayFor(model => post.Likes)</td>
+            </tr>
+        }
+    </table>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

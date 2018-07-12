@@ -10,168 +10,12 @@ namespace SocialNetworkMVC.Services
     public class DataService : IDataService
     {
         private static List<User> users;
-        /*= new List<User>
-        {
-            new User
-            {
-                Id=1,
-                Avatar="https://www.w3schools.com/w3images/avatar2.png",
-                CreatedAt=DateTime.Today,
-                Name="fdnjknvlkfdv",
-                Email="fkkfj@jdfjf",
-                Posts=new List<Post>
-                {
-                    new Post
-                    {
-                        Id=2,
-                        Body="11111111111234567",
-                        Likes=7,
-                        Title="ertyuiop[",
-                        createdAt=DateTime.Today,
-                        UserId=1,
-                        Comments=new List<Comment>
-                        {
-                            new Comment
-                            {
-                                Id=1,
-                                Body="3333333333333399999",
-                                CreatedAt=DateTime.Today,
-                                Likes=8,
-                                PostId=2,
-                                UserId=1
-                            }
-                        }
-                    }
-                },
-                Todos=new List<Todo>
-                {
-                    new Todo
-                    {
-                        Id=1,
-                        CreatedAt=DateTime.Today,
-                        IsComlete=true,
-                        Name="jjshdcl",
-                        UserId=1
-                    },
-                     new Todo
-                    {
-                        Id=2,
-                        CreatedAt=DateTime.Today,
-                        IsComlete=false,
-                        Name="jjshdcl",
-                        UserId=1
-                    },
-                     new Todo
-                    {
-                        Id=3,
-                        CreatedAt=DateTime.Today,
-                        IsComlete=true,
-                        Name="jjshdcl",
-                        UserId=1
-                    }
-                }
-            },
-              new User
-            {
-                Id=2,
-                Avatar="https://www.w3schools.com/w3images/avatar2.png",
-                CreatedAt=DateTime.Today,
-                Email="fkkfj@jdfjf",
-                Name="fdnjknvlkfdv",
-                Posts=new List<Post>
-                {
-                    new Post
-                    {
-                        Id=1,
-                        Body="11111111111234567",
-                        Likes=7,
-                        Title="ertyuiop[",
-                        createdAt=DateTime.Today,
-                        UserId=2,
-                        Comments=new List<Comment>
-                        {
-                            new Comment
-                            {
-                                Id=1,
-                                Body="999999999999",
-                                CreatedAt=DateTime.Today,
-                                Likes=8,
-                                PostId=1,
-                                UserId=2
-                            }
-                        }
-
-                    }
-                },
-                Todos=new List<Todo>
-                {
-                    new Todo
-                    {
-                        Id=3,
-                        CreatedAt=DateTime.Today,
-                        IsComlete=false,
-                        Name="jjshdcl",
-                        UserId=2
-                    }
-                }
-            },
-        }
-            
-            ;
-        private static List<Post> posts= new List<Post>
-        {
-             new Post
-                    {
-                        Id=2,
-                        Body="11111111111234567",
-                        Likes=7,
-                        Title="ertyuiop[",
-                        createdAt=DateTime.Today,
-                        UserId=1,
-                        Comments=new List<Comment>
-                        {
-                            new Comment
-                            {
-                                Id=1,
-                                Body="3333333333333399999",
-                                CreatedAt=DateTime.Today,
-                                Likes=8,
-                                PostId=2,
-                                UserId=1
-                            }
-                        }
-                    },
-              new Post
-                    {
-                        Id=1,
-                        Body="11111111111234567",
-                        Likes=7,
-                        Title="ertyuiop[",
-                        createdAt=DateTime.Today,
-                        UserId=2,
-                        Comments=new List<Comment>
-                        {
-                            new Comment
-                            {
-                                Id=1,
-                                Body="999999999999",
-                                CreatedAt=DateTime.Today,
-                                Likes=8,
-                                PostId=1,
-                                UserId=2
-                            }
-                        }
-
-                    }
-
-        };*/
-
-       private static List<Post> posts;
+        private static List<Post> posts;
         private static List<Todo> todos;
         private static List<Comment> comments;
         private static List<Address> addresses;
 
-       public DataService()
+        public DataService()
         {
             HttpClient client = new HttpClient();
 
@@ -328,8 +172,9 @@ namespace SocialNetworkMVC.Services
 
         public IEnumerable<Comment> GetPostComentsLessThenFiFtyLength(int userId)
         {
-                return users.Where(u => u.Id == userId).SelectMany(u => u.Posts
-                    .SelectMany(p => p.Comments).Where(c => c.Body.Length < 50)).ToList();
+            var user = users.Where(u => u.Id == userId).FirstOrDefault();
+            return user.Posts
+                    .SelectMany(p => p.Comments).Where(c => c.Body.Length < 50).ToList(); ;
         }
 
 
