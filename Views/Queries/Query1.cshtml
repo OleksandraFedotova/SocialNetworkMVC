@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xs-9 col-sm-9 col-md-10">
                 <label for="address" class="sr-only">Get Post Count</label>
-                <input type="text" class="form-control" id="address" placeholder="Get user's posts count" name="userId">
+                <input type="number"  class="form-control" id="address" placeholder="Get user's posts count" name="userId" required>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-2">
                 <input type="submit" class="btn btn-block btn-success" value="Search" />
@@ -21,7 +21,6 @@
 <div>
     <table>
         <tr>
-            <td>User posts count = </td>
             <td>@ViewBag.Count</td>
         </tr>
     </table>   

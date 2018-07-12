@@ -53,7 +53,6 @@ namespace SocialNetworkMVC.Controllers
         public ActionResult Query2(int userId)
         {
             var comments = _dataService.GetPostComentsLessThenFiFtyLength(userId);
-            ViewBag.Count = comments;
             return View(comments);
 
         }
@@ -72,8 +71,6 @@ namespace SocialNetworkMVC.Controllers
         public ActionResult Query3(int userId)
         {
             var doneTodos = _dataService.GetDoneTodos(userId);
-
-            ViewBag.DoneTodos = doneTodos;
             return View(doneTodos);
 
         }

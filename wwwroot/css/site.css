@@ -66,14 +66,12 @@ td, th {
     border: dotted #061d8b;
     background-color: #8bf5f8;
     float: right;
-    cursor: pointer;
     width: 100%;
 }
 
 .todo {
     border: dotted #a069e6;
     background-color: #7cf5c0;
-    cursor: pointer;
 }
 
 .user {
