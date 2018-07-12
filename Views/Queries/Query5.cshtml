@@ -3,24 +3,6 @@
     ViewData["Title"] = "View";
 }
 
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
-
 <h2>
     5. Obtain the following structure (pass Post Id to parameters)
 </h2>
@@ -55,7 +37,6 @@
         </tr>
         <tr>
             <td>@Model.TheBiggestComment.CreatedAt</td>
-            <td>@Model.TheBiggestComment.Title</td>
             <td>@Model.TheBiggestComment.Body</td>
             <td>Likes = @Model.TheBiggestComment.Likes</td>
         </tr>

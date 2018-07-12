@@ -9,44 +9,15 @@
 <div>
     <h4>Post</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.createdAt)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.createdAt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Likes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Likes)
-        </dd>
-    </dl>
+    <table>
+        <tr>
+            <td>@Html.DisplayFor(model => model.Id)</td>
+            <td>@Html.DisplayFor(model => model.createdAt)</td>
+            <td>@Html.DisplayFor(model => model.Title)</td>
+            <td>@Html.DisplayFor(model => model.Body)</td>
+            <td>Likes :  @Html.DisplayFor(model => model.Likes)</td>
+        </tr>
+    </table>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

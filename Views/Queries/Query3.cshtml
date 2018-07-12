@@ -3,24 +3,6 @@
     ViewData["Title"] = "View";
 }
 
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
-
 <h2>Here you can get user's done todos</h2>
 <form class="form" id="searchForm" action="@Url.Action("Query3", "Queries")" method="post">
     <div class="form-group">
